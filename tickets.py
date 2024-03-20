@@ -18,10 +18,20 @@ total = 0
 
 ############    define program functions ###########
 def main():
-    get_user_data()
-    perform_calculations()
-    display_results()
+    prompt_in = "\nWould you like to order again (Y or N) "
+    goodbye_msg = "Thank you for your order. Enjoy your movie!"
+    more_data = True
+    
+    while more_data:
+        get_user_data()
+        perform_calculations()
+        display_results()
 
+        yesno = input(prompt_in)
+        if (yesno.upper() == "N"):
+            more_data = False
+            print(goodbye_msg)
+            
 def get_user_data():
     global num_tickets
     num_tickets = int(input("Number of movie tickets: "))
@@ -33,15 +43,21 @@ def perform_calculations():
     total = subtotal + sales_tax
 
 def display_results():
-    print('----------------------------------------------')
-    print('**** CINEMA HOUSE MOVIES ****')
-    print('Your neighborhood movie house')
-    print('----------------------------------------------')
+    line = '----------------------------------------------'
+    currency = '8,.2f'
+    date = str(datetime.datetime.now())
+    title1 = '**** CINEMA HOUSE MOVIES ****'
+    title2 = 'Your neighborhood movie house'
+    
+    print(line)
+    print(title1)
+    print(title2)
+    print(date)
+    print(line)
     print('Tickets            $ ' + format(subtotal))
     print('Sales Tax         $ ' + format(sales_tax))
     print('Total                $ ' + format(total))
-    print('----------------------------------------------')
-    print(format(datetime.datetime.now()))
+    print(line)
 
 ############    call on main program to execute ###########
 main()
